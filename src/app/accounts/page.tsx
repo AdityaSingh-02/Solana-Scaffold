@@ -13,9 +13,13 @@ const page: NextPage = () => {
     setBalance(res);
   };
 
+  const handleAirDrop = async() => {
+    console.log("airdrop")
+  }
+
   return (
     <>
-      <Navbar />
+      <Navbar airdrop = {handleAirDrop} />
       <DetailsForm getKey={handleSubmit} solBalance = {balance} />
     </>
   );
