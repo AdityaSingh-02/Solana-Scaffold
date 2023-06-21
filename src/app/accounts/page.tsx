@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { Navbar, DetailsForm } from "../../Components";
 import { getBalance } from "../../Function/getBalance";
 import { airdrop } from "../../Function/Airdrop";
-
+import { PublicKey } from "@solana/web3.js";
 // /Accounts page
 const page: NextPage = () => {
 
@@ -13,7 +13,7 @@ const page: NextPage = () => {
 
   const handleSubmit = async(userInputKey:string) => {
     setPubKey(userInputKey);
-    const res = await getBalance(userInputKey);
+    const res = await getBalance(new PublicKey(userInputKey));
     if(res == -1) {
       alert("Please enter a valid public key");
       return;

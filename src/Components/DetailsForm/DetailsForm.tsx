@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, MouseEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 
 interface Props {
@@ -55,7 +55,7 @@ export const DetailsForm = (props: Props) => {
               focus ? "focus:border-purple-500" : "focus:border-red-500"
             }`}
           />
-          <Button btnClick={handleClick} inputText={"Show Balance"} />
+          <Button btnClick={handleClick} inputText={"Show Balance"} gradient={true} />
           <div className="flex flex-col items-center text-white pt-12">
             {showKey? <div>{userKey}</div>: ""}
             {showKey? <div>{props.solBalance} Sol</div>:""}

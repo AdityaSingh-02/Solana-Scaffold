@@ -1,5 +1,5 @@
-
-import { clusterApiUrl } from '@solana/web3.js';
+"use client";
+import { clusterApiUrl , Connection } from '@solana/web3.js';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
@@ -16,8 +16,8 @@ import {
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const network = WalletAdapterNetwork.Devnet;
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-
+    const endpoint = useMemo(() => clusterApiUrl("devnet"), [network]);
+  
     const wallets = useMemo(
         () => [
             new PhantomWalletAdapter(),
