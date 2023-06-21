@@ -5,6 +5,7 @@ import { Button } from "../Button/Button";
 interface Props {
   getKey: (userInputKey: string) => void;
   solBalance?: number;
+  validInput?: boolean;
 }
 
 export const DetailsForm = (props: Props) => {
@@ -55,10 +56,12 @@ export const DetailsForm = (props: Props) => {
               focus ? "focus:border-purple-500" : "focus:border-red-500"
             }`}
           />
-          <Button btnClick={handleClick} inputText={"Show Balance"} gradient={true} />
+          {focus ? <Button btnClick={handleClick} inputText={"Show Balance"} gradient={true} /> : <Button btnClick={handleClick} inputText={"Show Balance"} />}
           <div className="flex flex-col items-center text-white pt-12">
-            {showKey? <div>{userKey}</div>: ""}
-            {showKey? <div>{props.solBalance} Sol</div>:""}
+            {props.validInput && showKey? <div>{userKey}</div>: ""}
+            {props.validInput && showKey? <div>{props.solBalance} Sol</div>:""}
+            {!props.validInput && !showKey? "": ""}
+            {!props.validInput && !showKey? "":""}
           </div>
         </div>
       </div>

@@ -18,16 +18,12 @@ export const GetDetails: FC = () => {
     getBalance(sendKey).then((bal) => updtBalance(bal));
   }, [publicKey, connection]);
 
-  const handleClick = () => {
-    console.log(balance);
-  };
-
   return (
     <>
-      <h1>HEllo</h1>
-      <Button inputText="Ping me" btnClick={handleClick} />
-      {publicKey && <p>Public Key: {publicKey.toBase58()}</p>}
-      {publicKey && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}
+      <div className="flex flex-col items-center pt-10  text-white font-bold">
+        {publicKey && <p>Public Key: {publicKey.toBase58()}</p>}
+        {publicKey && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}
+      </div>
     </>
   );
 };

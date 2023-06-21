@@ -10,15 +10,18 @@ const page: NextPage = () => {
 
   const [balance, setBalance] = React.useState<number>();
   const [pubKey, setPubKey] = React.useState<string>(""); 
+  const [validInput, setValidInput] = React.useState<boolean>(true);
 
   const handleSubmit = async(userInputKey:string) => {
     setPubKey(userInputKey);
     const res = await getBalance(new PublicKey(userInputKey));
     if(res == -1) {
+      setValidInput(false)
       alert("Please enter a valid public key");
       return;
     }
     setBalance(res);
+    setValidInput(true);
   };
 
   const handleAirDrop = async() => {
@@ -37,7 +40,7 @@ const page: NextPage = () => {
   return (
     <>
       <Navbar airdrop = {handleAirDrop} />
-      <DetailsForm getKey={handleSubmit} solBalance = {balance} />
+      <DetailsForm getKey={handleSubmit} solBalance = {balance} validInput = {validInput} />
     </>
   );
 };
