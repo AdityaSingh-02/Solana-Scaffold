@@ -2,8 +2,8 @@
 import React from "react";
 import { NextPage } from "next";
 import { Navbar, DetailsForm } from "../../Components";
-import { getBalance } from "./getBalance";
-import { airdrop } from "./Airdrop";
+import { getBalance } from "../../Function/getBalance";
+import { airdrop } from "../../Function/Airdrop";
 
 // /Accounts page
 const page: NextPage = () => {
