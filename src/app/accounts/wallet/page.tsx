@@ -6,7 +6,7 @@ import { Navbar, WalletDetails } from "@/Components";
 const page = () => {
   return (
     <>
-      <Navbar />
+      <Navbar  todoAirdrop={true} />
       <WalletDetails />
     </>
   );

@@ -7,6 +7,7 @@ import Link from "next/link";
 
 interface Props {
   airdrop?: () => void;
+  todoAirdrop?: boolean;
 }
 
 export const Navbar = (props: Props) => {
@@ -22,12 +23,18 @@ export const Navbar = (props: Props) => {
       <div>
         <ul className="flex space-x-3">
           <li>
-            <Button
-              key={1}
-              inputText="Airdrop 1 Sol"
-              gradient={true}
-              btnClick={handleClick}
-            />
+            {!props.todoAirdrop ? (
+              <Button
+                key={1}
+                inputText="Airdrop 1 Sol"
+                gradient={true}
+                btnClick={handleClick}
+              />
+            ) : (
+              <Link href={"/accounts"}>
+                <Button key={1} inputText="Home" gradient={true} />
+              </Link>
+            )}
           </li>
           <li>
             <Link href={"/accounts/wallet"}>
@@ -35,7 +42,9 @@ export const Navbar = (props: Props) => {
             </Link>
           </li>
           <li>
-            <Button key={3} inputText="Show wallet" gradient={true} />
+            <Link href={"/sendSol"}>
+              <Button key={3} inputText="Send Solana" gradient={true} />
+            </Link>
           </li>
         </ul>
       </div>
