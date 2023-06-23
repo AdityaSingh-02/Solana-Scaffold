@@ -1,52 +1,54 @@
 "use client";
-import { clusterApiUrl , Connection } from '@solana/web3.js';
-import { FC, ReactNode, useCallback, useMemo } from 'react';
-import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { WalletModalProvider as ReactUIWalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import { clusterApiUrl, Connection } from "@solana/web3.js";
+import { FC, ReactNode, useCallback, useMemo } from "react";
+import { WalletAdapterNetwork, WalletError } from "@solana/wallet-adapter-base";
 import {
-    PhantomWalletAdapter,
-    SolflareWalletAdapter,
-    SolletExtensionWalletAdapter,
-    SolletWalletAdapter,
-    TorusWalletAdapter,
-    // LedgerWalletAdapter,
-    // SlopeWalletAdapter,
-} from '@solana/wallet-adapter-wallets';
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import { WalletModalProvider as ReactUIWalletModalProvider, WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import {
+  PhantomWalletAdapter,
+  SolflareWalletAdapter,
+  SolletExtensionWalletAdapter,
+  SolletWalletAdapter,
+  TorusWalletAdapter,
+  // LedgerWalletAdapter,
+  // SlopeWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const network = WalletAdapterNetwork.Devnet;
-    const endpoint = useMemo(() => clusterApiUrl("devnet"), [network]);
-  
-    const wallets = useMemo(
-        () => [
-            new PhantomWalletAdapter(),
-            new SolflareWalletAdapter(),
-            new SolletWalletAdapter({ network }),
-            new SolletExtensionWalletAdapter({ network }),
-            new TorusWalletAdapter(),
-            // new LedgerWalletAdapter(),
-            // new SlopeWalletAdapter(),
-        ],
-        [network]
-    );
+  const network = WalletAdapterNetwork.Devnet;
+  const endpoint = useMemo(() => clusterApiUrl("devnet"), [network]);
 
-    const onError = useCallback(
-        (error: WalletError) => {
-            // notify({ type: 'error', message: error.message ? `${error.name}: ${error.message}` : error.name });
-            console.error(error);
-        },
-        []
-    );
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+      new SolflareWalletAdapter(),
+      new SolletWalletAdapter({ network }),
+      new SolletExtensionWalletAdapter({ network }),
+      new TorusWalletAdapter(),
+      // new LedgerWalletAdapter(),
+      // new SlopeWalletAdapter(),
+    ],
+    [network]
+  );
 
-    return (
-        // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} onError={onError} autoConnect>
-                <ReactUIWalletModalProvider>{children}</ReactUIWalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
-    );
+  const onError = useCallback((error: WalletError) => {
+    // notify({ type: 'error', message: error.message ? `${error.name}: ${error.message}` : error.name });
+    console.error(error);
+  }, []);
+
+  return (
+    // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} onError={onError} autoConnect>
+        <WalletModalProvider>
+          <ReactUIWalletModalProvider>{children}</ReactUIWalletModalProvider>
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
 };
 
 export default WalletContextProvider;

@@ -11,12 +11,8 @@ export const WalletDetails = () => {
       <div className="flex justify-center pt-16">
         <div className="flex flex-col  pt-16 items-center w-[800px] h-[600px] text-black bg-zinc-900">
           <p className="text-white pb-5">Connect Wallet</p>
-          
-          <WalletContextProvider>
-            <WalletMultiButton />
-            <GetDetails />
-          </WalletContextProvider>
-
+          <WalletMultiButton />
+          <GetDetails />
         </div>
       </div>
     </>
