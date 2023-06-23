@@ -14,7 +14,16 @@ export const SolanaSend:FC = () => {
     if(!connection || !publicKey){
       return;
     }
-    await SendSol(Keypair.fromSeed(publicKey.toBytes()), new PublicKey(sendTo), amount );
+    await SendSol(Keypair.fromSeed(publicKey.toBytes()), new PublicKey(sendTo), amount ).then((res) => {
+      if(res === 'error'){
+        alert('Problem in sending sol');
+        return;
+      }
+      if(res === 'success'){
+        alert('Sol sent successfully');
+        return;
+      }
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +45,7 @@ export const SolanaSend:FC = () => {
           type="number"
           name="amount"
           onChange = {handleChange}
+          placeholder="Enter Amount"
           className={`w-[700px] text-black mb-10 rounded-lg px-3 focus-within:outline-none py-2 border-4`}
         />
       </div>
@@ -44,6 +54,7 @@ export const SolanaSend:FC = () => {
         <input
           type="text"
           name="sendTo"
+          placeholder="Enter Public Key of receiver"
           onChange={handleChange}
           className={`w-[700px] text-black mb-10 rounded-lg px-3 focus-within:outline-none py-2 border-4`}
         />
