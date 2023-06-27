@@ -14,7 +14,7 @@ export const SolanaSend:FC = () => {
     if(!connection || !publicKey){
       return;
     }
-    await SendSol(Keypair.fromSeed(publicKey.toBytes()), new PublicKey(sendTo), amount ).then((res) => {
+    await SendSol(Keypair.fromSeed(publicKey.toBytes()), new PublicKey(sendTo), amount, connection).then((res) => {
       if(res === 'error'){
         alert('Problem in sending sol');
         return;

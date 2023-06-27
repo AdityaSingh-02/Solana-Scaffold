@@ -3,7 +3,6 @@ import React from "react";
 import { Navbar } from "@/Components";
 import { Operations } from "@/Components";
 import Head from "next/head";
-import WalletContextProvider from "@/Contexts/WalletContextProvider";
 
 const page: NextPage = () => {
   return (
@@ -14,9 +13,7 @@ const page: NextPage = () => {
       </Head>
       <div className="bg-SolBg2 bg-cover bg-no-repeat h-screen">
         <Navbar todoAirdrop={true} />
-        <WalletContextProvider>
-          <Operations />
-        </WalletContextProvider>
+        <Operations />
       </div>
     </>
   );
