@@ -42,8 +42,13 @@ export const Navbar = (props: Props) => {
             </Link>
           </li>
           <li>
-            <Link href={"/sendSol"}>
+            <Link href={"/send-solana"}>
               <Button key={3} inputText="Send Solana" gradient={true} />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/create-token"}>
+              <Button key={4} inputText="Create Token" gradient={true} />
             </Link>
           </li>
         </ul>

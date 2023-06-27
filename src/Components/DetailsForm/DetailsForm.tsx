@@ -44,7 +44,7 @@ export const DetailsForm = (props: Props) => {
   return (
     <>
       <div className="flex justify-center pt-16">
-        <div className="flex flex-col  pt-16 items-center w-[800px] h-[600px] text-black bg-zinc-900">
+        <div className="flex flex-col  pt-16 items-center w-[800px] h-[600px] text-black backdrop-blur-2xl">
           <p className="text-white pb-5">Get Account Balance</p>
           <input
             type="text"

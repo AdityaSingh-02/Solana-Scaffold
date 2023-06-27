@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import WalletContextProvider from "@/Contexts/WalletContextProvider";
+import { Button } from "../Button/Button";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 require("@solana/wallet-adapter-react-ui/styles.css");
 import { GetDetails } from "./getDetails";

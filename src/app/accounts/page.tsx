@@ -39,8 +39,10 @@ const page: NextPage = () => {
 
   return (
     <>
+    <div className="bg-SolBg2 bg-cover bg-no-repeat h-screen">
       <Navbar airdrop = {handleAirDrop} />
       <DetailsForm getKey={handleSubmit} solBalance = {balance} validInput = {validInput} />
+    </div>
     </>
   );
 };
