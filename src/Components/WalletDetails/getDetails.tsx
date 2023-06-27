@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
-import { Button } from "../Button/Button";
+
 import { useConnection } from "@solana/wallet-adapter-react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getBalance } from "@/Function/getBalance";

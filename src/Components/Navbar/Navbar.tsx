@@ -4,6 +4,7 @@ import Image from "next/image";
 import SolanaImg from "../../../public/solana.png";
 import { Button } from "../Button/Button";
 import Link from "next/link";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 interface Props {
   airdrop?: () => void;
@@ -38,11 +39,6 @@ export const Navbar = (props: Props) => {
             )}
           </li>
           <li>
-            <Link href={"/accounts/wallet"}>
-              <Button key={2} inputText="Connect Wallet" gradient={true} />
-            </Link>
-          </li>
-          <li>
             <Link href={"/send-solana"}>
               <Button key={3} inputText="Send Solana" gradient={true} />
             </Link>
@@ -51,6 +47,9 @@ export const Navbar = (props: Props) => {
             <Link href={"/create-token"}>
               <Button key={4} inputText="Create Token" gradient={true} />
             </Link>
+          </li>
+          <li>
+              <WalletMultiButton />
           </li>
         </ul>
       </div>
