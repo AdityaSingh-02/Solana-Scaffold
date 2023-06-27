@@ -12,10 +12,12 @@ const page: NextPage = () => {
         <title>Send Solana</title>
         <meta name="description" content="Send Solana" />
       </Head>
-      <Navbar todoAirdrop={true} />
-      <WalletContextProvider>
-        <Operations />
-      </WalletContextProvider>
+      <div className="bg-SolBg2 bg-cover bg-no-repeat h-screen">
+        <Navbar todoAirdrop={true} />
+        <WalletContextProvider>
+          <Operations />
+        </WalletContextProvider>
+      </div>
     </>
   );
 };

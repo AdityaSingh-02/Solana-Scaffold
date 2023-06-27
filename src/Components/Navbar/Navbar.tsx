@@ -16,7 +16,8 @@ export const Navbar = (props: Props) => {
   };
 
   return (
-    <div className="flex justify-between px-12 items-center h-12 bg-gradient-to-r from-purple-500 to-green-500">
+    <div className="flex z-20 justify-between px-12 items-center h-14 backdrop-blur-3xl">
+    {/* <div className="flex justify-between px-12 items-center h-12 bg-gradient-to-r from-purple-500 to-green-500"> */}
       <div className="flex flex-row text-2xl text-black font-semibold justify-center items-center">
         <Image src={SolanaImg} alt="Solana" height={200} width={200} /> Scaffold
       </div>

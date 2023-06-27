@@ -15,6 +15,8 @@ module.exports = {
         'SolBg2': "url('/SolBG-2.jpg')",
         'SolBg3': "url('/SolBG-3.jpg')",
         'SolBg4': "url('/SolBG-4.jpg')",
+        'SolBg5': "url('/SolBG-5.jpg')",
+        'SolBg6': "url('/SolBG-6.jpg')",
       },
     },
   },
