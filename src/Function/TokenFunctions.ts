@@ -5,25 +5,21 @@ import {
   approve,
   transfer,
 } from "@solana/spl-token";
-import { Connection, Keypair, PublicKey } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey, Signer } from "@solana/web3.js";
 
+
+// Creating a MINT account
 export const createMintAcc = async (
   conn: Connection,
-  payer: Keypair,
+  payer: Signer,
   mintAuthority: PublicKey,
-  freezeAuthority: PublicKey | null,
+  freezeAuthority: PublicKey,
   decimals: number
 ) => {
-  const newMint = await createMint(
-    conn,
-    payer,
-    mintAuthority,
-    freezeAuthority,
-    decimals
-  );
-  return newMint;
+  
 };
 
+// Creating a TOKEN account
 export const createTokenAccount = async (
   conn: Connection,
   payer: Keypair,

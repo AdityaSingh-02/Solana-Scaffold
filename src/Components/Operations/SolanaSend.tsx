@@ -1,29 +1,32 @@
 import React, { FC, useState } from "react";
 import { Button } from "../Button/Button";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet} from "@solana/wallet-adapter-react";
 import { SendSol } from "@/Function/SendSol";
 import { Keypair, PublicKey } from "@solana/web3.js";
 
-export const SolanaSend:FC = () => {
-  const {connection} = useConnection();
-  const {publicKey} = useWallet();
+export const SolanaSend: FC = () => {
+  const { connection } = useConnection();
+  const { publicKey } = useWallet();
   const [amount, setAmount] = useState<number>(0);
-  const [sendTo, setSendTo] = useState<string>('');
+  const [sendTo, setSendTo] = useState<string>("");
 
-  const clickToSendSol = async() => {
-    if(!connection || !publicKey){
+  const clickToSendSol = async () => {
+    if (!connection || !publicKey) {
       return;
     }
-    await SendSol(Keypair.fromSeed(publicKey.toBytes()), new PublicKey(sendTo), amount, connection).then((res) => {
-      if(res === 'error'){
-        alert('Problem in sending sol');
+    const sec = Uint8Array.from([252,220,205,41,109,21,7,250,229,220,47,202,101,206,23,114,66,127,213,78,98,147,71,197,81,166,96,146,58,44,254,138,73,99,8,184,140,31,11,200,140,190,161,25,121,237,65,88,18,216,72,217,138,87,168,77,89,141,13,64,139,158,0,187])
+    const fromKeyPair = Keypair.fromSecretKey(sec)
+    await SendSol(fromKeyPair, new PublicKey(sendTo), amount, connection).then(
+      (res) => {
+        if (res === "error") {
+          return;
+        }
+        if (res === "success") {
+          return;
+        }
         return;
       }
-      if(res === 'success'){
-        alert('Sol sent successfully');
-        return;
-      }
-    });
+    );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +35,10 @@ export const SolanaSend:FC = () => {
     if (name === "amount") {
       setAmount(parseInt(value));
     }
-    if(name === 'sendTo'){
+    if (name === "sendTo") {
       setSendTo(value);
     }
-  }
+  };
 
   return (
     <>
@@ -44,7 +47,7 @@ export const SolanaSend:FC = () => {
         <input
           type="number"
           name="amount"
-          onChange = {handleChange}
+          onChange={handleChange}
           placeholder="Enter Amount"
           className={`w-[700px] text-black mb-10 rounded-lg px-3 focus-within:outline-none py-2 border-4`}
         />
