@@ -10,7 +10,7 @@ import {
   getMinimumBalanceForRentExemptAccount,
 } from "@solana/spl-token";
 
-const CreateMint: FC = () => {
+export const CreateMint: FC = () => {
   const [txid, setTxid] = useState<string>("");
   const [mint, setMint] = useState<string>("");
 
@@ -52,7 +52,7 @@ const CreateMint: FC = () => {
   return (
     <>
       {publicKey ? (
-        <Button inputText="Create Mint" btnClick={createMintHandler} />
+        <Button inputText="Create Mint" btnClick={createMintHandler} gradient={true} />
       ) : (
         "Please Connect Wallet"
       )}
@@ -66,4 +66,3 @@ const CreateMint: FC = () => {
   );
 };
 
-export default CreateMint;

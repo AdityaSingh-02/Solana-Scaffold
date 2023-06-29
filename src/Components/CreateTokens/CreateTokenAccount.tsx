@@ -11,7 +11,7 @@ import {
   getAssociatedTokenAddress,
 } from "@solana/spl-token";
 
-const CreateTokenAccount: FC = () => {
+export const CreateTokenAccount: FC = () => {
   const [userData, setUserData] = useState({
     tokenMint: "",
     ownerPubKey: "",
@@ -57,7 +57,7 @@ const CreateTokenAccount: FC = () => {
 
   return (
     <>
-      <div className="flex flex-col space-y-4 py-5 ">
+      {publicKey && (<div className="flex flex-col space-y-4 py-5 ">
         <input
           type="text"
           placeholder="Enter Token Mint"
@@ -76,13 +76,18 @@ const CreateTokenAccount: FC = () => {
           }
           className="px-2 py-2 rounded-md w-[500px] border-4 focus:outline-none focus:border-purple-500"
         />
-      </div>
-      <Button
+      </div>) }
+      {publicKey && <Button
         inputText="Create Token Account"
         btnClick={createTokenAccHandler}
-      />
+        gradient={true}
+      />}
+      {txSig ? (
+        <div>
+          <p>Token Account Address: {tokenAccount}</p>
+        </div>
+      ) : null}
     </>
   );
 };
 
-export default CreateTokenAccount;
