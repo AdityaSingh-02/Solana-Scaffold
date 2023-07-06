@@ -6,3 +6,4 @@ export {operationsPage as Operations} from './Operations/Operations';
 export {CreateToken} from './CreateTokens/CreateToken';
 export {Initialize} from './AnchorContract/Initialize';
 export {Increment} from './AnchorContract/Increment';
+export {Decrement} from './AnchorContract/Decrement';

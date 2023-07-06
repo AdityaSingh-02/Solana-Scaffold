@@ -28,7 +28,7 @@
       "accounts": [
         {
           "name": "counter",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -44,7 +44,7 @@
       "accounts": [
         {
           "name": "counter",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

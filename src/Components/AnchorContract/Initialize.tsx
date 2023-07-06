@@ -5,41 +5,47 @@ import idl from '../../../idl.json'
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
 import { Button } from '../Button/Button';
 
-export const Initialize:FC = () => {
+export interface Props{
+  setCounter:any
+  setTransactionUrl:any
+}
+const PROGRAM_ID = new anchor.web3.PublicKey(idl.metadata.address);
+export const Initialize:FC<Props> = ({setCounter, setTransactionUrl}) => {
 
   const [program, setProgram] = useState<anchor.Program>()
-  const {connection} = useConnection();
+
+  const { connection } = useConnection()
   const wallet = useAnchorWallet()!;
 
   useEffect(() => {
-    let provider: anchor.Provider;
+    let provider: anchor.Provider
+
     try {
-      provider = anchor.getProvider();
+      provider = anchor.getProvider()
     } catch {
-      provider = new anchor.AnchorProvider(connection, wallet, {});
-      anchor.setProvider(provider);
+      provider = new anchor.AnchorProvider(connection, wallet, {})
+      anchor.setProvider(provider)
     }
 
-    const prog = new anchor.Program(idl as anchor.Idl, idl.metadata.address);
-    setProgram(prog)
-  },[]);
+    const program = new anchor.Program(idl as anchor.Idl, PROGRAM_ID)
+    setProgram(program)
+  }, [])
 
-  const onClick = async() => {
-    const newAccount = anchor.web3.Keypair.generate();
+  const onClick = async () => {
+    const newAccount = anchor.web3.Keypair.generate()
 
-    try {
-      const sig = await program?.methods.initialize().accounts({
+    const sig = await program?.methods
+      .initialize()
+      .accounts({
         counter: newAccount.publicKey,
-        user: wallet.publicKey,
-        systemProgram: anchor.web3.SystemProgram.programId,
-      }).signers([newAccount]).rpc();
-      console.log("Created" , sig);
-    } catch{
-      console.log("Transaction Error")
-    }
-    // setTransactionUrl(`https://explorer.solana.com/tx/${sig}?cluster=devnet`);
-    // setCounter(newAccount.publicKey)
+      })
+      .signers([newAccount])
+      .rpc()
+
+    setTransactionUrl(`https://explorer.solana.com/tx/${sig}?cluster=devnet`)
+    setCounter(newAccount.publicKey)
   }
+
 
   return (
     <>
