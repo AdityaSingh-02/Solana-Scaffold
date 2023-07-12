@@ -1,16 +1,16 @@
-'use client';
-import React from "react";
+"use client"
+import React, {useState} from "react";
 import { NextPage } from "next";
 import { Navbar, DetailsForm } from "../../Components";
 import { getBalance } from "../../Function/getBalance";
 import { airdrop } from "../../Function/Airdrop";
 import { PublicKey } from "@solana/web3.js";
-// /Accounts page
-const page: NextPage = () => {
 
-  const [balance, setBalance] = React.useState<number>();
-  const [pubKey, setPubKey] = React.useState<string>(""); 
-  const [validInput, setValidInput] = React.useState<boolean>(true);
+const page:NextPage = () => {
+
+  const [balance, setBalance] = useState(0);
+  const [pubKey, setPubKey] = useState(""); 
+  const [validInput, setValidInput] = useState(true);
 
   const handleSubmit = async(userInputKey:string) => {
     setPubKey(userInputKey);
@@ -39,7 +39,7 @@ const page: NextPage = () => {
 
   return (
     <>
-    <div className="bg-SolBg bg-cover bg-no-repeat h-screen">
+    <div className="bg-gradient-to-b from-green-500 to-blue-500 bg-cover bg-no-repeat h-screen">
       <Navbar airdrop = {handleAirDrop} />
       <DetailsForm getKey={handleSubmit} solBalance = {balance} validInput = {validInput} />
     </div>

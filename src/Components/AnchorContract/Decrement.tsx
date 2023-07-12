@@ -23,7 +23,7 @@ export const Decrement: FC<Props> = ({ counter, setTransactionUrl }) => {
 
     const prog = new anchor.Program(idl as anchor.Idl, PROGRAM_ID);
     setProgram(prog);
-  }, []);
+  }, [program]);
 
   const decrementCounter = async () => {
     const sig = await program?.methods

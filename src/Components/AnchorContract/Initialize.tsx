@@ -29,7 +29,7 @@ export const Initialize:FC<Props> = ({setCounter, setTransactionUrl}) => {
 
     const program = new anchor.Program(idl as anchor.Idl, PROGRAM_ID)
     setProgram(program)
-  }, [])
+  }, [program])
 
   const onClick = async () => {
     const newAccount = anchor.web3.Keypair.generate()

@@ -54,6 +54,11 @@ export const Navbar = (props: Props) => {
             </Link>
           </li>
           <li>
+            <Link href={'/gifs'}>
+              <Button key={7} inputText="Gifs contract" gradient={true} />
+            </Link>
+          </li>
+          <li>
             <WalletMultiButton />
           </li>
         </ul>

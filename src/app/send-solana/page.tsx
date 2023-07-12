@@ -11,7 +11,7 @@ const page: NextPage = () => {
         <title>Send Solana</title>
         <meta name="description" content="Send Solana" />
       </Head>
-      <div className="bg-SolBg2 bg-cover bg-no-repeat h-screen">
+      <div className="bg-gradient-to-t from-blue-500 to-green-500 h-screen">
         <Navbar todoAirdrop={true} />
         <Operations />
       </div>
