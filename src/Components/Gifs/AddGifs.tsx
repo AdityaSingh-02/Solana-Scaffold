@@ -8,16 +8,15 @@ import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 
 interface Props {
-  baseAccount: any;
+  baseAccount: string;
 }
 export const AddGifs: FC<Props> = ({ baseAccount }: Props) => {
   const PROGRAM_ID = new anchor.web3.PublicKey(gifsIDl.metadata.address);
   const [gifLink, addGifLink] = useState<string>("");
   const [program, setProgram] = useState<anchor.Program>();
-  const [gifList, setGifAccount] = useState([]);
+  const [gifList, setGifList] = useState();
   const { connection } = useConnection();
   const wallet = useAnchorWallet()!;
-
   // Gets the program and sets the program value ie. a new anchor program
   useEffect(() => {
     let provider: anchor.Provider;
@@ -36,17 +35,29 @@ export const AddGifs: FC<Props> = ({ baseAccount }: Props) => {
   const getGifList = async () => {
     try {
       const account = await program?.account.BaseAccount.fetch(
-        baseAccount.publicKey
+        baseAccount
       );
       console.log("Found Gif account");
-      setGifAccount(account?.gifList);
+      setGifList(account?.gifList);
     } catch (error) {
       console.log("unable to get gifs", error);
     }
   };
 
   // This is to upload the gifs
-  const addGif = async () => {};
+  const addGif = async () => {
+    try {
+      await program?.rpc.addNewGif(gifLink, {
+        accounts: {
+          baseAccount,
+          user: wallet.publicKey,
+        },
+      });
+      console.log("gif added successfully")
+    } catch (error: any) {
+      throw error;
+    }
+  };
 
   const fakeGifs = [
     {
@@ -73,14 +84,13 @@ export const AddGifs: FC<Props> = ({ baseAccount }: Props) => {
           onChange={(e) => addGifLink(e.target.value)}
         />
         <Button inputText="Add" gradient={true} btnClick={addGif} />
-        {gifLink === null ? (
+        {gifList === null ? (
           <div className="grid grid-cols-3 p-5">
-            {/* {fakeGifs.map(({ id, item }: any) => (
-              <div key={id} className="p-6">
-                <Image src={item} alt="gifs" height={200} width={200} />
+            {gifList.map((item: any) => (
+              <div key={item.id} className="p-6">
+                <Image src={item.gifLink} alt="gifs" height={200} width={200} />
               </div>
-            ))} */}
-            no gifs
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-3 p-5">
